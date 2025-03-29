@@ -1,17 +1,60 @@
-# OpenCV_Project
-# Analyzing the size of different objects in an image using OpenCV
 
-The provided code is an example of object dimension measurement using computer vision techniques. The code uses OpenCV and other libraries to detect objects in an image and estimate their dimensions based on a reference object of known size. The goal is to measure the width and height of various objects in the image.
+# 📏 Object Size Measurement using OpenCV
 
-The code reads an image file and performs preprocessing steps such as converting the image to grayscale and applying Gaussian blur. It then applies edge detection using the Canny algorithm to identify the contours of objects in the image.
+This project implements an **automated object dimension measurement system** using **OpenCV** and **image processing techniques**. By leveraging contour detection and a reference object, the system accurately determines the **real-world dimensions (width & height)** of objects present in an image.
 
-Contours are sorted from left to right to establish a reference object. The reference object is assumed to be a square with known dimensions (in this case, a 2cm by 2cm square). The distance in pixels between two corners of the reference object is calculated, and the conversion factor between pixels and centimeters is determined.
+## 🔥 Features
+- 📸 **Preprocesses images** using **grayscale conversion, Gaussian blur, and edge detection** (Canny algorithm).
+- 🔍 **Detects contours** and sorts them based on position to identify the reference object.
+- 🎯 **Pixel-to-CM calibration** using a known **2cm x 2cm square** as the reference.
+- 📏 **Computes object dimensions** using Euclidean distance and conversion factors.
+- 🖼 **Overlays measured dimensions** on the image with bounding boxes.
 
-Next, the code iterates over the remaining contours (excluding the reference object) and performs the following steps for each contour:
+## 🛠️ Tech Stack
+- **Python**
+- **OpenCV**
+- **NumPy**
+- **Scipy**
+- **Imutils**
 
-1. Calculates the dimensions of the object by measuring the distances between its corners.
-2. Draws the bounding box around the object.
-3. Calculates the width and height of the object in centimeters using the pixel-to-centimeter conversion factor.
-4. Displays the dimensions next to the object.
+## 🚀 How It Works
+1. **Preprocess Image**  
+   - Convert to grayscale  
+   - Apply Gaussian blur  
+   - Perform edge detection (Canny)  
 
-The final result is an annotated image showing the detected objects with their respective dimensions.
+2. **Find Contours**  
+   - Extract contours using `cv2.findContours()`  
+   - Sort contours left-to-right to identify the **reference object**  
+
+3. **Compute Pixel-to-CM Ratio**  
+   - Extract the bounding box of the reference square  
+   - Calculate the **pixel-to-cm conversion factor**  
+
+4. **Measure Object Dimensions**  
+   - Extract bounding boxes of other objects  
+   - Compute width & height using Euclidean distance  
+   - Convert pixel values to centimeters  
+
+5. **Overlay Measurements**  
+   - Draw bounding boxes  
+   - Annotate image with **measured dimensions**  
+
+## 📷 Example Output
+The final image displays detected objects **with their real-world dimensions**.
+
+## 🏗️ Setup Instructions
+1. **Install Dependencies**  
+   ```bash
+   pip install numpy opencv-python scipy imutils
+   ```
+2. **Run the Script**  
+   ```bash
+   python image.py
+   ```
+3. **Provide an Image** (`12.jpg`) with a **2cm reference square**.
+
+## 📌 Notes
+- A **fixed-size reference object** is required in the image.
+- Ensure the **background contrast** is sufficient for edge detection.
+
